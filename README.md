@@ -57,10 +57,13 @@ You can use the facade...
     Flash::error('error message');
     Flash::overlay('modal overlay message', 'Message Title');
 
+Each type will flash specific data to the session to add the appropriate class to the view. 
+These classes are defined in the configuration file. 
+
 ### Multiple Flashes
 
 You can flash any number of messages of any type.
-In your view, you can use `@foreach` to run through them (see below).
+In your view, you can use `@foreach` to run through them (see the [view](https://github.com/codezero-be/flash/blob/master/src/views/message.blade.php)).
     
     Flash::success('success message');
     Flash::warning('warning message');
@@ -77,7 +80,7 @@ Obviously an overlay message is always dismissible and does not have this option
 
     Flash::success('success message', [], false); 
 
-> Dismissing alerts requires some javascript from [Bootstrap](http://getbootstrap.com/getting-started/), or your own.
+> Dismissing alerts require some javascript from [Bootstrap](http://getbootstrap.com/getting-started/), or your own.
 
 ### Localization
 
