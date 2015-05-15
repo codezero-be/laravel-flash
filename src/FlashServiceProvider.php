@@ -76,7 +76,7 @@ class FlashServiceProvider extends ServiceProvider
      */
     private function registerFlash()
     {
-        $this->app->bind('CodeZero\Flash\Flash', function () {
+        $this->app->singleton('CodeZero\Flash\Flash', function () {
             $config = config('flash');
             $session = app()->make('CodeZero\Flash\SessionStore\SessionStore');
             $translator = app()->make('CodeZero\Flash\Translator\Translator');
