@@ -12,6 +12,8 @@ This package is based on the original version of [Laracasts](https://github.com/
 
 - Flash multiple messages in one request.
 - Pass in a simple message or a key to look up in [Laravel's Translator](http://laravel.com/docs/5.0/localization).
+- Provide an optional array of values to fill any placeholders on the localized message. 
+- Enable or disable a `dismissible` option for alerts (defaults to `true`).
 
 ## Laravel 5 Installation
 
