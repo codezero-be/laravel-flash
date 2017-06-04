@@ -15,7 +15,15 @@ This package is based on the original version of [Laracasts](https://github.com/
 - Provide an optional array of values to fill any placeholders on the localized message. 
 - Enable or disable a `dismissible` option for alerts (defaults to `true`).
 
-## Laravel 5 Installation
+## Laravel 5.5 Installation
+
+Install this package through Composer:
+
+    composer require codezero/flash
+
+The service provider and facade will be registered automatically.
+
+## Laravel <= 5.4 Installation
 
 Install this package through Composer:
 

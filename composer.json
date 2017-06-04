@@ -33,5 +33,15 @@
       "src//helpers.php"
     ]
   },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "CodeZero\\Flash\\FlashServiceProvider"
+      ],
+      "aliases": {
+        "Flash": "CodeZero\\Flash\\Facade\\Flash"
+      }
+    }
+  },
   "minimum-stability": "stable"
 }
