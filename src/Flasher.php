@@ -6,50 +6,45 @@ interface Flasher
      * Flash an info message.
      *
      * @param string $message
-     * @param array $placeholders
      *
      * @return $this
      */
-    public function info($message, array $placeholders = []);
+    public function info($message);
 
     /**
      * Flash a success message.
      *
      * @param string $message
-     * @param array $placeholders
      *
      * @return $this
      */
-    public function success($message, array $placeholders = []);
+    public function success($message);
 
     /**
      * Flash a warning message.
      *
      * @param string $message
-     * @param array $placeholders
      *
      * @return $this
      */
-    public function warning($message, array $placeholders = []);
+    public function warning($message);
 
     /**
      * Flash an error message.
      *
      * @param string $message
-     * @param array $placeholders
      *
      * @return $this
      */
-    public function error($message, array $placeholders = []);
+    public function error($message);
 
     /**
      * Flash an overlay message.
      *
      * @param string $message
      * @param string $title
-     * @param array $placeholders
      *
      * @return $this
      */
-    public function overlay($message, $title = 'Info', array $placeholders = []);
+    public function overlay($message, $title = 'Info');
 }

@@ -24,7 +24,6 @@ class FlashServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerSessionStore();
-        $this->registerTranslator();
         $this->registerFlasher();
         $this->registerFlash();
         $this->registerFlashAlias();
@@ -40,19 +39,6 @@ class FlashServiceProvider extends ServiceProvider
         $this->app->bind(
             'CodeZero\Flash\SessionStore\SessionStore',
             'CodeZero\Flash\SessionStore\LaravelSessionStore'
-        );
-    }
-
-    /**
-     * Register the Translator binding.
-     *
-     * @return void
-     */
-    private function registerTranslator()
-    {
-        $this->app->bind(
-            'CodeZero\Flash\Translator\Translator',
-            'CodeZero\Flash\Translator\LaravelTranslator'
         );
     }
 
@@ -79,9 +65,8 @@ class FlashServiceProvider extends ServiceProvider
         $this->app->singleton('CodeZero\Flash\Flash', function () {
             $config = config('flash');
             $session = app()->make('CodeZero\Flash\SessionStore\SessionStore');
-            $translator = app()->make('CodeZero\Flash\Translator\Translator');
 
-            return new Flash($config, $session, $translator);
+            return new Flash($config, $session);
         });
     }
 

@@ -1,7 +1,6 @@
 <?php namespace CodeZero\Flash;
 
 use CodeZero\Flash\SessionStore\SessionStore;
-use CodeZero\Flash\Translator\Translator;
 
 class Flash implements Flasher
 {
@@ -28,42 +27,31 @@ class Flash implements Flasher
     private $session;
 
     /**
-     * Message Translator.
-     *
-     * @var Translator
-     */
-    private $translator;
-
-    /**
      * Create a new Flash instance.
      *
      * @param array $config
      * @param SessionStore $session
-     * @param Translator $translator
      */
     public function __construct(
         array $config,
-        SessionStore $session,
-        Translator $translator
+        SessionStore $session
     ) {
         $this->sessionKey = $config['sessionKey'];
         $this->classNames = $config['classNames'];
         $this->session = $session;
-        $this->translator = $translator;
     }
 
     /**
      * Flash an info message.
      *
      * @param string $message
-     * @param array $placeholders
      * @param bool $dismissible
      *
      * @return $this
      */
-    public function info($message, array $placeholders = [], $dismissible = true)
+    public function info($message, $dismissible = true)
     {
-        $this->message($message, null, $placeholders, 'info', $dismissible);
+        $this->message($message, null, 'info', $dismissible);
 
         return $this;
     }
@@ -72,14 +60,13 @@ class Flash implements Flasher
      * Flash a success message.
      *
      * @param string $message
-     * @param array $placeholders
      * @param bool $dismissible
      *
      * @return $this
      */
-    public function success($message, array $placeholders = [], $dismissible = true)
+    public function success($message, $dismissible = true)
     {
-        $this->message($message, null, $placeholders, 'success', $dismissible);
+        $this->message($message, null, 'success', $dismissible);
 
         return $this;
     }
@@ -88,14 +75,13 @@ class Flash implements Flasher
      * Flash a warning message.
      *
      * @param string $message
-     * @param array $placeholders
      * @param bool $dismissible
      *
      * @return $this
      */
-    public function warning($message, array $placeholders = [], $dismissible = true)
+    public function warning($message, $dismissible = true)
     {
-        $this->message($message, null, $placeholders, 'warning', $dismissible);
+        $this->message($message, null,'warning', $dismissible);
 
         return $this;
     }
@@ -104,14 +90,13 @@ class Flash implements Flasher
      * Flash an error message.
      *
      * @param string $message
-     * @param array $placeholders
      * @param bool $dismissible
      *
      * @return $this
      */
-    public function error($message, array $placeholders = [], $dismissible = true)
+    public function error($message, $dismissible = true)
     {
-        $this->message($message, null, $placeholders, 'error', $dismissible);
+        $this->message($message, null, 'error', $dismissible);
 
         return $this;
     }
@@ -121,13 +106,12 @@ class Flash implements Flasher
      *
      * @param string $message
      * @param string $title
-     * @param array $placeholders
      *
      * @return $this
      */
-    public function overlay($message, $title = 'Info', array $placeholders = [])
+    public function overlay($message, $title = 'Info')
     {
-        $this->message($message, $title, $placeholders, 'overlay', true, true);
+        $this->message($message, $title, 'overlay', true, true);
 
         return $this;
     }
@@ -137,7 +121,6 @@ class Flash implements Flasher
      *
      * @param string $message
      * @param string $title
-     * @param array $placeholders
      * @param string $level
      * @param bool $dismissible
      * @param bool $overlay
@@ -147,17 +130,10 @@ class Flash implements Flasher
     private function message(
         $message,
         $title = '',
-        array $placeholders = [],
         $level = 'info',
         $dismissible = true,
         $overlay = false
     ) {
-        $message = $this->getTranslation($message, $placeholders);
-
-        if ( ! empty($title)) {
-            $title = $this->getTranslation($title, $placeholders);
-        }
-
         $flash = [
             'message'     => $message,
             'title'       => $title,
@@ -185,23 +161,5 @@ class Flash implements Flasher
         return $this->session->has($this->sessionKey)
             ? $this->session->get($this->sessionKey)
             : [];
-    }
-
-    /**
-     * Get a translation for the message key
-     * or return the original message.
-     *
-     * @param string $message
-     * @param array $placeholders
-     *
-     * @return string
-     */
-    private function getTranslation($message, array $placeholders)
-    {
-        if ($this->translator->has($message)) {
-            $message = $this->translator->get($message, $placeholders);
-        }
-
-        return $message;
     }
 }

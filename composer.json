@@ -22,7 +22,6 @@
     "phpspec/phpspec": "~2.0",
     "henrikbjorn/phpspec-code-coverage": "~1.0",
     "illuminate/session": "~5.0",
-    "illuminate/translation": "~5.0",
     "illuminate/support": "~5.0"
   },
   "autoload": {
