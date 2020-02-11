@@ -26,7 +26,6 @@ class FlashServiceProvider extends ServiceProvider
         $this->registerSessionStore();
         $this->registerFlasher();
         $this->registerFlash();
-        $this->registerFlashAlias();
     }
 
     /**
@@ -68,16 +67,6 @@ class FlashServiceProvider extends ServiceProvider
 
             return new Flash($config, $session);
         });
-    }
-
-    /**
-     * Register the Flash alias.
-     *
-     * @return void
-     */
-    private function registerFlashAlias()
-    {
-        $this->app->alias('CodeZero\Flash\Flasher', 'flash');
     }
 
     /**
