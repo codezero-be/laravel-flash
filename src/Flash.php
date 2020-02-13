@@ -28,7 +28,7 @@ class Flash
      *
      * @param string $message
      *
-     * @return $this
+     * @return \CodeZero\Flash\Notification
      */
     public function info($message)
     {
@@ -40,7 +40,7 @@ class Flash
      *
      * @param string $message
      *
-     * @return $this
+     * @return \CodeZero\Flash\Notification
      */
     public function success($message)
     {
@@ -52,7 +52,7 @@ class Flash
      *
      * @param string $message
      *
-     * @return $this
+     * @return \CodeZero\Flash\Notification
      */
     public function warning($message)
     {
@@ -64,7 +64,7 @@ class Flash
      *
      * @param string $message
      *
-     * @return $this
+     * @return \CodeZero\Flash\Notification
      */
     public function error($message)
     {
