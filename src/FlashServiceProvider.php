@@ -1,107 +1,84 @@
-<?php namespace CodeZero\Flash;
+<?php
+
+namespace CodeZero\Flash;
 
 use Illuminate\Support\ServiceProvider;
 
 class FlashServiceProvider extends ServiceProvider
 {
     /**
-     * Bootstrap the application.
+     * The package name.
+     *
+     * @var string
+     */
+    protected $name = 'flash';
+
+    /**
+     * Bootstrap any application services.
      *
      * @return void
      */
     public function boot()
     {
         $this->loadViews();
-        $this->setPublishPaths();
-        $this->mergeConfig();
+        $this->registerPublishableFiles();
     }
 
     /**
-     * Register the service provider.
+     * Register any application services.
      *
      * @return void
      */
     public function register()
     {
-        $this->registerSessionStore();
-        $this->registerFlasher();
-        $this->registerFlash();
+        $this->registerFacade();
+        $this->mergeConfig();
     }
 
     /**
-     * Register the SessionStore binding.
+     * Load package views.
      *
      * @return void
      */
-    private function registerSessionStore()
+    protected function loadViews()
     {
-        $this->app->bind(
-            'CodeZero\Flash\SessionStore\SessionStore',
-            'CodeZero\Flash\SessionStore\LaravelSessionStore'
-        );
+        $this->loadViewsFrom(__DIR__.'/../resources/views', $this->name);
     }
 
     /**
-     * Register the Flasher binding.
+     * Register the facade.
      *
      * @return void
      */
-    private function registerFlasher()
+    protected function registerFacade()
     {
-        $this->app->bind(
-            'CodeZero\Flash\Flasher',
-            'CodeZero\Flash\Flash'
-        );
+        $this->app->bind('flash', Flash::class);
     }
 
     /**
-     * Register the Flash binding.
+     * Register the publishable files.
      *
      * @return void
      */
-    private function registerFlash()
-    {
-        $this->app->singleton('CodeZero\Flash\Flash', function () {
-            $config = config('flash');
-            $session = app()->make('CodeZero\Flash\SessionStore\SessionStore');
-
-            return new Flash($config, $session);
-        });
-    }
-
-    /**
-     * Load views.
-     *
-     * @return void
-     */
-    private function loadViews()
-    {
-        $this->loadViewsFrom(__DIR__ . '/views', 'flash');
-    }
-
-    /**
-     * Set publish paths.
-     *
-     * @return void
-     */
-    private function setPublishPaths()
+    protected function registerPublishableFiles()
     {
         $this->publishes([
-            __DIR__ . '/config.php' => config_path('flash.php')
+            __DIR__ . "/../config/{$this->name}.php" => config_path("{$this->name}.php"),
         ], 'config');
 
         $this->publishes([
-            __DIR__ . '/views' => base_path('resources/views/vendor/codezero/flash')
+            __DIR__."/../resources/views" =>  resource_path("views/vendor/{$this->name}"),
         ], 'views');
     }
 
     /**
-     * Merge configuration files.
+     * Merge published configuration file with
+     * the original package configuration file.
      *
      * @return void
      */
-    private function mergeConfig()
+    protected function mergeConfig()
     {
-        $this->mergeConfigFrom(__DIR__ . '/config.php', 'flash');
+        $this->mergeConfigFrom(__DIR__ . "/../config/{$this->name}.php", $this->name);
     }
 }

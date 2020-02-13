@@ -1,165 +1,118 @@
-<?php namespace CodeZero\Flash;
+<?php
 
-use CodeZero\Flash\SessionStore\SessionStore;
+namespace CodeZero\Flash;
 
-class Flash implements Flasher
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Session;
+
+class Flash
 {
     /**
-     * Session key under which the flash
-     * notifications are stored.
+     * Flash notifications session key.
      *
      * @var string
      */
-    private $sessionKey;
-
-    /**
-     * Preferred class names that will be flashed.
-     *
-     * @var array
-     */
-    private $classNames;
-
-    /**
-     * Session Store.
-     *
-     * @var SessionStore
-     */
-    private $session;
+    protected $sessionKey;
 
     /**
      * Create a new Flash instance.
-     *
-     * @param array $config
-     * @param SessionStore $session
      */
-    public function __construct(
-        array $config,
-        SessionStore $session
-    ) {
-        $this->sessionKey = $config['sessionKey'];
-        $this->classNames = $config['classNames'];
-        $this->session = $session;
+    public function __construct()
+    {
+        $this->sessionKey = Config::get('flash.sessionKey');
     }
 
     /**
-     * Flash an info message.
+     * Flash an info notification.
      *
      * @param string $message
-     * @param bool $dismissible
      *
      * @return $this
      */
-    public function info($message, $dismissible = true)
+    public function info($message)
     {
-        $this->message($message, null, 'info', $dismissible);
-
-        return $this;
+        return $this->notification($message,'info');
     }
 
     /**
-     * Flash a success message.
+     * Flash a success notification.
      *
      * @param string $message
-     * @param bool $dismissible
      *
      * @return $this
      */
-    public function success($message, $dismissible = true)
+    public function success($message)
     {
-        $this->message($message, null, 'success', $dismissible);
-
-        return $this;
+        return $this->notification($message,'success');
     }
 
     /**
-     * Flash a warning message.
+     * Flash a warning notification.
      *
      * @param string $message
-     * @param bool $dismissible
      *
      * @return $this
      */
-    public function warning($message, $dismissible = true)
+    public function warning($message)
     {
-        $this->message($message, null,'warning', $dismissible);
-
-        return $this;
+        return $this->notification($message,'warning');
     }
 
     /**
-     * Flash an error message.
+     * Flash an error notification.
      *
      * @param string $message
-     * @param bool $dismissible
      *
      * @return $this
      */
-    public function error($message, $dismissible = true)
+    public function error($message)
     {
-        $this->message($message, null, 'error', $dismissible);
-
-        return $this;
+        return $this->notification($message,'error');
     }
 
     /**
-     * Flash an overlay message.
+     * Flash a notification.
      *
      * @param string $message
-     * @param string $title
-     *
-     * @return $this
-     */
-    public function overlay($message, $title = 'Info')
-    {
-        $this->message($message, $title, 'overlay', true, true);
-
-        return $this;
-    }
-
-    /**
-     * Flash a message.
-     *
-     * @param string $message
-     * @param string $title
      * @param string $level
-     * @param bool $dismissible
-     * @param bool $overlay
      *
-     * @return $this
+     * @return \CodeZero\Flash\Notification
      */
-    private function message(
-        $message,
-        $title = '',
-        $level = 'info',
-        $dismissible = true,
-        $overlay = false
-    ) {
-        $flash = [
-            'message'     => $message,
-            'title'       => $title,
-            'level'       => $level,
-            'dismissible' => $dismissible,
-            'overlay'     => $overlay,
-            'class'       => $this->classNames[$level]
+    public function notification($message, $level = 'info')
+    {
+        $notification = [
+            'message' => $message,
+            'level' => $level,
         ];
 
-        $messages = $this->getExistingFlashMessages();
-        $messages[] = $flash;
+        $notifications = $this->getFlashedNotificationsFromSession();
+        $notifications[] = $notification;
 
-        $this->session->flash($this->sessionKey, $messages);
+        Session::flash($this->sessionKey, $notifications);
 
-        return $this;
+        return new Notification($message, $level);
     }
 
     /**
-     * Get messages that have already been flashed.
+     * Get flashed notifications.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function notifications()
+    {
+        return Collection::make($this->getFlashedNotificationsFromSession())->map(function ($attributes) {
+            return new Notification($attributes['message'], $attributes['level']);
+        });
+    }
+
+    /**
+     * Get flashed notifications from the session.
      *
      * @return array
      */
-    private function getExistingFlashMessages()
+    protected function getFlashedNotificationsFromSession()
     {
-        return $this->session->has($this->sessionKey)
-            ? $this->session->get($this->sessionKey)
-            : [];
+        return Session::get($this->sessionKey, []);
     }
 }

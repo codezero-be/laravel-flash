@@ -1,11 +1,13 @@
-<?php namespace CodeZero\Flash\Facade;
+<?php
+
+namespace CodeZero\Flash\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 class Flash extends Facade
 {
     /**
-     * Get the binding in the IoC container
+     * Get the binding in the IoC container.
      *
      * @return string
      */

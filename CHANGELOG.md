@@ -1,6 +1,6 @@
 # Changelog
 
-All Notable changes to `Flash` will be documented in this file.
+All notable changes to `Flash` will be documented in this file.
 
 ## 1.1.0 (2017-06-04)
 
