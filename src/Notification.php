@@ -38,7 +38,7 @@ class Notification implements Htmlable
      *
      * @return \Illuminate\View\View
      */
-    public function view()
+    public function getView()
     {
         $view = strtolower($this->level);
 
@@ -61,7 +61,7 @@ class Notification implements Htmlable
      */
     public function toHtml()
     {
-        return $this->view()->render();
+        return $this->getView()->render();
     }
 
     /**
@@ -72,6 +72,6 @@ class Notification implements Htmlable
      */
     public function __toString()
     {
-        return $this->view()->render();
+        return $this->getView()->render();
     }
 }
