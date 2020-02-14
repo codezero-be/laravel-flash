@@ -66,7 +66,7 @@ class Notification implements Htmlable
         return View::first([
             $this->view,
             "flash::notifications.{$view}",
-            "flash::notification",
+            "flash::notifications.default",
         ], [
             'notification' => $this,
         ]);
