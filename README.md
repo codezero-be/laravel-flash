@@ -43,7 +43,7 @@ Then you can flash a message to the session in your controllers.
 flash()->success('Update succeeded!');
 ```
 
-> You can also use the facade `\CodeZero\Flash\Flash` instead of the `flash()` helper.
+> You can also use the facade `\CodeZero\Flash\Facades\Flash` instead of the `flash()` helper.
 
 The message will be displayed once on the next page load.
 
