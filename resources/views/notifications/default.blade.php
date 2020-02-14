@@ -1,3 +1,3 @@
 <div>
-    {{ $notification->message }}.
+    {{ $notification->message }}
 </div>
