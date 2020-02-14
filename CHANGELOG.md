@@ -2,6 +2,15 @@
 
 All notable changes to `Flash` will be documented in this file.
 
+## 2.0.0 (2020-02-14)
+
+- Completely rewrite the package!
+- Use better strategy for flash notification views
+- Make notification levels more flexible
+- Drop translation support (this can easily be done in the controller or view)
+- Drop dismissible option
+- Drop overlay level
+
 ## 1.1.0 (2017-06-04)
 
 - Enable package auto-discovery for Laravel 5.5 
