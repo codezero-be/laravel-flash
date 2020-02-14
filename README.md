@@ -1,173 +1,151 @@
-# Flash
+# Flash Notifications for Laravel
 
 [![GitHub release](https://img.shields.io/github/release/codezero-be/flash.svg)]()
 [![License](https://img.shields.io/packagist/l/codezero/flash.svg)]()
-[![Build Status](https://img.shields.io/travis/codezero-be/flash.svg?branch=master)](https://travis-ci.org/codezero-be/flash)
-[![Scrutinizer](https://img.shields.io/scrutinizer/g/codezero-be/flash.svg)](https://scrutinizer-ci.com/g/codezero-be/flash)
+[![Build Status](https://scrutinizer-ci.com/g/codezero-be/flash/badges/build.png?b=master)](https://scrutinizer-ci.com/g/codezero-be/flash/build-status/master)
+[![Code Coverage](https://scrutinizer-ci.com/g/codezero-be/flash/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/codezero-be/flash/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/codezero-be/flash/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/codezero-be/flash/?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/codezero/flash.svg)](https://packagist.org/packages/codezero/flash)
 
-### Flash messages to the session with [Laravel 5](http://laravel.com/).
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/R6R3UQ8V)
 
-This package is based on the original version of [Laracasts](https://github.com/laracasts/flash), but adds a few extra features:
+#### Flash messages to the session with [Laravel](http://laravel.com/).
 
-- Flash multiple messages in one request.
-- Pass in a simple message or a key to look up in [Laravel's Translator](http://laravel.com/docs/5.0/localization).
-- Provide an optional array of values to fill any placeholders on the localized message. 
-- Enable or disable a `dismissible` option for alerts (defaults to `true`).
+## 🧩 Features
 
-## Laravel 5.5 Installation
+- Flash multiple messages.
+- Use built in notification levels (success, error, ...) or imagine your own.
 
-Install this package through Composer:
+## ✅ Requirements
 
-    composer require codezero/flash
+- PHP >= 7.2
+- Laravel >= 6.0
 
-The service provider and facade will be registered automatically.
+## 📦 Install
 
-## Laravel <= 5.4 Installation
+```bash
+composer require codezero/flash
+```
 
-Install this package through Composer:
+> Laravel will automatically register the ServiceProvider.
 
-    composer require codezero/flash
+## 🛠 Usage
 
-Add a reference to `FlashServiceProvider` to the providers array in `config/app.php`:
+Somewhere in your views, include the flash notifications partial:
 
-    'providers' => [
-        'CodeZero\Flash\FlashServiceProvider'
-    ]
+```blade
+@include('flash::notifications')
+```
 
-If you want to use the facade, then you can also add it there:
+Then you can flash a message to the session in your controllers.
 
-    'aliases' => [
-        'Flash' => 'CodeZero\Flash\Facade\Flash'
-    ]
-    
-## Usage
+```php
+flash()->success('Update succeeded!');
+```
 
-You can flash a message to the session in your controllers, before you redirect.
+> You can also use the facade `\CodeZero\Flash\Flash` instead of the `flash()` helper.
 
-### 3 Ways to Flash...
+The message will be displayed once on the next page load.
 
-You can use the facade...
+## 🚨 Notification Levels
 
-    Flash::info('message');
-    
-... or the helper method...
+You can use the built in notification levels:
 
-    flash()->info('message');
-    
-... or you can inject `CodeZero\Flash\Flasher` in your controller and call it like this:
+```php
+flash()->info('info message');
+flash()->success('success message');
+flash()->warning('warning message');
+flash()->error('error message');
+```
 
-    $this->flash->info('message');
+Or you can specify a custom level:
 
-### Flash Types
+```php
+flash()->notification('message', 'level');
+```
 
-    Flash::info('info message');
-    Flash::success('success message');
-    Flash::warning('warning message');
-    Flash::error('error message');
-    Flash::overlay('modal overlay message', 'Message Title');
+## 🔖 Rendering Notifications
 
-Each type will flash specific data to the session to add the appropriate class to the view. 
-These classes are defined in the configuration file. 
+### Customize the notification views
 
-### Multiple Flashes
+If you want to customize the templates, you can publish the views:
 
-You can flash any number of messages of any type.
-In your view, you can use `@foreach` to run through them (see the [view](https://github.com/codezero-be/flash/blob/master/src/views/message.blade.php)).
-    
-    Flash::success('success message');
-    Flash::warning('warning message');
+```bash
+php artisan vendor:publish --provider="CodeZero\Flash\FlashServiceProvider" --tag="views"
+```
 
-... or...
+You will find the views in `resources/views/vendor/flash`.
 
-    Flash::success('success message')->warning('warning message');
+### Default views for built in notification levels
 
-### Dismissible Messages
+A notification will be rendered using a view file which name corresponds with the notification level.
 
-By default an `alert-dismissible` class is added and a close button is shown. 
-If you don't want this, you can pass `false` as the third argument. 
-Obviously an overlay message is always dismissible and does not have this option. 
+So `flash()->success('message')` will load a `success.blade.php` view file.
 
-    Flash::success('success message', [], false); 
+These views live in `resources/views/vendor/flash/notifications`.
 
-> Dismissing alerts require some javascript from [Bootstrap](http://getbootstrap.com/getting-started/), or your own.
+### Default view for custom notification levels
 
-### Localization
+If no corresponding file can be found in the package's view folder, then the `default.blade.php` view file will be used.
 
-If you want to fetch a localized message from [Laravel's Translator](http://laravel.com/docs/5.0/localization), 
-then you can pass in the translation key instead of a message. 
-As a second parameter, you can optionally provide an array of placeholder values for the translated string.
+So `flash()->notification('message', 'custom')` will load the `default.blade.php` view file.
 
-    Flash::error('users.user_not_found', ['id' => $id]);
-    Flash::overlay('users.user_not_found', 'users.title', ['id' => $id]);
-    
-This would look for an array key `user_not_found` and `title` in `resources/lang/en/users.php` (if your locale is `en`) 
-and replace `:id` with the actual `$id`.
+This view lives in `resources/views/vendor/flash/notifications`.
 
-    'user_not_found' => 'There is no user with the ID of :id.'
-    'title' => 'User :id Not Found'
+### Add views for custom notification levels
 
-### Show the Messages
+To add view files for custom levels, create them in `resources/views/vendor/flash/notifications`.
 
-In your master view, simply include a partial:
+### Override default notification views
 
-    @include('flash::message')
-    
-A full example with [Bootstrap](http://getbootstrap.com/):
+You can override the view file to be used when you flash a notification:
 
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Document</title>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    </head>
-    <body>
-    
-    <div class="container">
-    
-        @include('flash::message')
+```php
+// use 'resources/views/custom.blade.php' instead of
+// 'resources/views/vendor/flash/notifications/success.blade.php'
+flash()->success('message')->setView('custom');
+```
 
-        <p>Welcome...</p>
-        
-    </div>
-    
-    <script src="//code.jquery.com/jquery.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    
-    <!-- This is only necessary if you do Flash::overlay('...') -->
-    <script>
-        $('#flash-overlay-modal').modal();
-    </script>
-    
-    </body>
-    </html>
-    
-### Customize the Messages
+The specified view name is relative to your app's view folder `resources/views`.
 
-If you want to customize the templates you can publish the views:
+### Access notification values in a view
 
-    php artisan vendor:publish --provider="CodeZero\Flash\FlashServiceProvider" --tag="views"
+Notification views will have a `$notification` variable which is an instance of `\CodeZero\Flash\Notification`.
 
-> You will find the views in `resources/views/vendor/codezero/flash`.
+This gives you access to:
 
-If you want to change the class names or session key, publish the configuration file:
+```blade
+{{ $notification->message }}
+{{ $notification->level }}
+```
 
-    php artisan vendor:publish --provider="CodeZero\Flash\FlashServiceProvider" --tag="config"
+## ⚙️ Publish Configuration File
 
-> You will find the configuration file at `config/flash.php`.
+```bash
+php artisan vendor:publish --provider="CodeZero\Flash\FlashServiceProvider" --tag="config"
+```
 
-## Testing
+You will now find a `flash.php` file in the `config` folder.
 
-    $ vendor/bin/phpspec run
+## 🚧 Testing
 
-## Security
+```bash
+composer test
+```
+
+## ☕️ Credits
+
+- [Ivan Vermeyen](https://byterider.io)
+- [All contributors](../../contributors)
+
+## 🔓 Security
 
 If you discover any security related issues, please [e-mail me](mailto:ivan@codezero.be) instead of using the issue tracker.
 
-## License
+## 📑 Changelog
+
+See a list of important changes in the [changelog](CHANGELOG.md).
+
+## 📜 License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
-
----
-[![Analytics](https://ga-beacon.appspot.com/UA-58876018-1/codezero-be/flash)](https://github.com/igrigorik/ga-beacon)
