@@ -27,12 +27,13 @@ class BaseFlash
      * Flash a notification.
      *
      * @param string $message
-     * @param string $level
+     * @param string|null $level
      *
      * @return \CodeZero\Flash\Notification
      */
-    public function notification($message, $level = 'default')
+    public function notification($message, $level = null)
     {
+        $level = $level ?: 'default';
         $notification = new Notification($message, $level);
 
         $notifications = $this->getFlashedNotificationsFromSession();
