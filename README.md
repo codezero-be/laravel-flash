@@ -127,6 +127,42 @@ php artisan vendor:publish --provider="CodeZero\Flash\FlashServiceProvider" --ta
 
 You will now find a `flash.php` file in the `config` folder.
 
+## 🔧 Create Your Own Custom Flash Class
+
+If you don't want to use the built in notification levels and want to create your own, you can extend the `\CodeZero\Flash\BaseFlash` class.
+
+```php
+<?php
+
+namespace App;
+
+use CodeZero\Flash\BaseFlash;
+
+class YourCustomFlash extends BaseFlash
+{
+    /**
+     * Flash a notification.
+     *
+     * @param string $message
+     *
+     * @return \CodeZero\Flash\Notification
+     */
+    public function danger($message)
+    {
+        return $this->notification($message, 'danger');
+    }
+}
+```
+
+Then change the `flash` binding in the `register` method of your `app/Providers/AppServiceProvider`:
+
+```php
+public function register()
+{
+    $this->app->bind('flash', \App\YourCustomFlash::class);
+}
+```
+
 ## 🚧 Testing
 
 ```bash
