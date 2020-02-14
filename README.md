@@ -119,14 +119,6 @@ This gives you access to:
 {{ $notification->level }}
 ```
 
-## ⚙️ Publish Configuration File
-
-```bash
-php artisan vendor:publish --provider="CodeZero\Flash\FlashServiceProvider" --tag="config"
-```
-
-You will now find a `flash.php` file in the `config` folder.
-
 ## 🔧 Create Your Own Custom Flash Class
 
 If you don't want to use the built in notification levels and want to create your own, you can extend the `\CodeZero\Flash\BaseFlash` class.
@@ -162,6 +154,14 @@ public function register()
     $this->app->bind('flash', \App\YourCustomFlash::class);
 }
 ```
+
+## ⚙️ Publish Configuration File
+
+```bash
+php artisan vendor:publish --provider="CodeZero\Flash\FlashServiceProvider" --tag="config"
+```
+
+You will now find a `flash.php` file in the `config` folder.
 
 ## 🚧 Testing
 
