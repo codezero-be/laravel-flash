@@ -81,17 +81,14 @@ class Flash
      */
     public function notification($message, $level = 'info')
     {
-        $notification = [
-            'message' => $message,
-            'level' => $level,
-        ];
+        $notification = new Notification($message, $level);
 
         $notifications = $this->getFlashedNotificationsFromSession();
         $notifications[] = $notification;
 
         Session::flash($this->sessionKey, $notifications);
 
-        return new Notification($message, $level);
+        return $notification;
     }
 
     /**
@@ -101,9 +98,7 @@ class Flash
      */
     public function notifications()
     {
-        return Collection::make($this->getFlashedNotificationsFromSession())->map(function ($attributes) {
-            return new Notification($attributes['message'], $attributes['level']);
-        });
+        return Collection::make($this->getFlashedNotificationsFromSession());
     }
 
     /**

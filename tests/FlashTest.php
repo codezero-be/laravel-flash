@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Session;
 class FlashTest extends TestCase
 {
     /** @test */
-    public function it_flashes_notification()
+    public function it_flashes_a_notification()
     {
         Flash::notification('Some message');
 
@@ -25,16 +25,21 @@ class FlashTest extends TestCase
     }
 
     /** @test */
-    public function it_stores_notifications_as_an_array_in_the_session()
+    public function it_stores_notifications_in_the_session()
     {
         Flash::notification('Some message');
 
-        $this->assertIsArray(Session::get(Config::get('flash.sessionKey')));
+        $sessionNotifications = Session::get(Config::get('flash.sessionKey'));
 
-        $notifications = Flash::notifications();
+        $this->assertIsArray($sessionNotifications);
+        $this->assertInstanceOf(Notification::class, $sessionNotifications[0]);
 
-        $this->assertInstanceOf(Collection::class, $notifications);
-        $this->assertIsArray(Session::get(Config::get('flash.sessionKey')));
+        $flashNotifications = Flash::notifications();
+
+        $this->assertInstanceOf(Collection::class, $flashNotifications);
+        $this->assertInstanceOf(Notification::class, $flashNotifications[0]);
+
+        $this->assertEquals($sessionNotifications[0], $flashNotifications[0]);
     }
 
     /** @test */

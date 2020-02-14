@@ -22,6 +22,13 @@ class Notification implements Htmlable
     public $level;
 
     /**
+     * Custom notification view.
+     *
+     * @var string
+     */
+    protected $view;
+
+    /**
      * Create a new Notification instance.
      *
      * @param string $message
@@ -34,7 +41,21 @@ class Notification implements Htmlable
     }
 
     /**
-     * Render the view for this notification.
+     * Set a custom view for this notification.
+     *
+     * @param string $view
+     *
+     * @return \CodeZero\Flash\Notification
+     */
+    public function setView($view)
+    {
+        $this->view = $view;
+
+        return $this;
+    }
+
+    /**
+     * Get the view for this notification.
      *
      * @return \Illuminate\View\View
      */
@@ -43,6 +64,7 @@ class Notification implements Htmlable
         $view = strtolower($this->level);
 
         return View::first([
+            $this->view,
             "flash::notifications.{$view}",
             "flash::notification",
         ], [
