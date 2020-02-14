@@ -79,7 +79,7 @@ class Flash
      *
      * @return \CodeZero\Flash\Notification
      */
-    public function notification($message, $level = 'info')
+    public function notification($message, $level = 'default')
     {
         $notification = new Notification($message, $level);
 

@@ -21,7 +21,7 @@ class FlashTest extends TestCase
         $this->assertEquals(1, $notifications->count());
         $this->assertInstanceOf(Notification::class, $notifications->first());
         $this->assertEquals('Some message', $notifications->first()->message);
-        $this->assertEquals('info', $notifications->first()->level);
+        $this->assertEquals('default', $notifications->first()->level);
     }
 
     /** @test */
