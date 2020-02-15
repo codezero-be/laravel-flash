@@ -1,5 +1,7 @@
 filter:
     excluded_paths:
+        - "config/"
+        - "resources/"
         - "tests/"
 checks:
     php:
