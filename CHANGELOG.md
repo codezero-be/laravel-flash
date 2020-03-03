@@ -2,6 +2,10 @@
 
 All notable changes to `Flash` will be documented in this file.
 
+## 2.1.0 (2020-03-03)
+
+- Add support for Laravel 7
+
 ## 2.0.0 (2020-02-14)
 
 - Completely rewrite the package!
