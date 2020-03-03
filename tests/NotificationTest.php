@@ -80,8 +80,8 @@ class NotificationTest extends TestCase
         $response = $this->get('flash');
 
         $response->assertOk();
-        $response->assertSee('<h1>Custom view!</h1>');
-        $response->assertSee('<div>Some message</div>');
+        $response->assertSee('<h1>Custom view!</h1>', false);
+        $response->assertSee('<div>Some message</div>', false);
     }
 
     /**
