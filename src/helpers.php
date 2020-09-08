@@ -13,7 +13,7 @@ if ( ! function_exists('flash')) {
     {
         $flash = app('flash');
 
-        if (is_null($message)) {
+        if ($message === null) {
             return $flash;
         }
 
