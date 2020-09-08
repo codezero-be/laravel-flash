@@ -3,9 +3,9 @@
 [![GitHub release](https://img.shields.io/github/release/codezero-be/laravel-flash.svg?style=flat-square)](CHANGELOG.md)
 [![Laravel](https://img.shields.io/badge/laravel-8-red?style=flat-square&logo=laravel&logoColor=white)](https://laravel.com)
 [![License](https://img.shields.io/packagist/l/codezero/laravel-flash.svg?style=flat-square)](LICENSE.md)
-[![Build Status](https://img.shields.io/scrutinizer/build/g/codezero-be/laravel-flash/master?style=flat-square)](https://scrutinizer-ci.com/g/codezero-be/laravel-flash/build-status/master)
-[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/codezero-be/laravel-flash/master?style=flat-square)](https://scrutinizer-ci.com/g/codezero-be/laravel-flash/?branch=master)
-[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/quality/g/codezero-be/laravel-flash/master?style=flat-square)](https://scrutinizer-ci.com/g/codezero-be/laravel-flash/?branch=master)
+[![Build Status](https://img.shields.io/github/workflow/status/codezero-be/laravel-flash/Tests/master?style=flat-square&logo=github&logoColor=white&label=tests)](https://github.com/codezero-be/laravel-flash/actions)
+[![Code Coverage](https://img.shields.io/codacy/coverage/22d50bd2782540bb806f576966a5f5d5/master?style=flat-square)](https://app.codacy.com/gh/codezero-be/laravel-flash)
+[![Code Quality](https://img.shields.io/codacy/grade/22d50bd2782540bb806f576966a5f5d5/master?style=flat-square)](https://app.codacy.com/gh/codezero-be/laravel-flash)
 [![Total Downloads](https://img.shields.io/packagist/dt/codezero/laravel-flash.svg?style=flat-square)](https://packagist.org/packages/codezero/laravel-flash)
 
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/R6R3UQ8V)
