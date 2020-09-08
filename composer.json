@@ -1,5 +1,5 @@
 {
-    "name": "codezero/flash",
+    "name": "codezero/laravel-flash",
     "description": "Clean flash message system for Laravel.",
     "keywords": [
         "flash",
