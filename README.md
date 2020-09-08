@@ -25,7 +25,7 @@
 ## 📦 Install
 
 ```bash
-composer require codezero/flash
+composer require codezero/laravel-flash
 ```
 
 > Laravel will automatically register the ServiceProvider.
