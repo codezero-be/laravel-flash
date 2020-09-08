@@ -1,11 +1,12 @@
 # Flash Notifications for Laravel
 
-[![GitHub release](https://img.shields.io/github/release/codezero-be/flash.svg)]()
-[![License](https://img.shields.io/packagist/l/codezero/flash.svg)]()
-[![Build Status](https://scrutinizer-ci.com/g/codezero-be/flash/badges/build.png?b=master)](https://scrutinizer-ci.com/g/codezero-be/flash/build-status/master)
-[![Code Coverage](https://scrutinizer-ci.com/g/codezero-be/flash/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/codezero-be/flash/?branch=master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/codezero-be/flash/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/codezero-be/flash/?branch=master)
-[![Total Downloads](https://img.shields.io/packagist/dt/codezero/flash.svg)](https://packagist.org/packages/codezero/flash)
+[![GitHub release](https://img.shields.io/github/release/codezero-be/flash.svg?style=flat-square)](CHANGELOG.md)
+[![Laravel](https://img.shields.io/badge/laravel-8-red?style=flat-square&logo=laravel&logoColor=white)](https://laravel.com)
+[![License](https://img.shields.io/packagist/l/codezero/flash.svg?style=flat-square)](LICENSE.md)
+[![Build Status](https://img.shields.io/scrutinizer/build/g/codezero-be/flash/master?style=flat-square)](https://scrutinizer-ci.com/g/codezero-be/flash/build-status/master)
+[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/codezero-be/flash/master?style=flat-square)](https://scrutinizer-ci.com/g/codezero-be/flash/?branch=master)
+[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/quality/g/codezero-be/flash/master?style=flat-square)](https://scrutinizer-ci.com/g/codezero-be/flash/?branch=master)
+[![Total Downloads](https://img.shields.io/packagist/dt/codezero/flash.svg?style=flat-square)](https://packagist.org/packages/codezero/flash)
 
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/R6R3UQ8V)
 
