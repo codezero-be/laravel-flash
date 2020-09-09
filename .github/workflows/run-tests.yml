@@ -20,8 +20,8 @@ jobs:
           - laravel: 8.*
             testbench: 6.*
         exclude:
-            - laravel: 8.*
-              php: 7.2
+          - laravel: 8.*
+            php: 7.2
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }} - ${{ matrix.os }}
 
@@ -53,5 +53,5 @@ jobs:
       - name: Run Codacy Coverage Reporter
         uses: codacy/codacy-coverage-reporter-action@master
         with:
-            project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
-            coverage-reports: coverage.xml
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          coverage-reports: coverage.xml
