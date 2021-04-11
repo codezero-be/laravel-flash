@@ -2,6 +2,10 @@
 
 All notable changes to `Flash` will be documented in this file.
 
+## 2.3.0 (2021-04-11)
+
+- Add support for PHP 8
+
 ## 2.2.0 (2020-09-07)
 
 - Add support for Laravel 8
