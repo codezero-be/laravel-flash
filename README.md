@@ -1,7 +1,7 @@
 # Flash Notifications for Laravel
 
 [![GitHub release](https://img.shields.io/github/release/codezero-be/laravel-flash.svg?style=flat-square)](https://github.com/codezero-be/laravel-flash/releases)
-[![Laravel](https://img.shields.io/badge/laravel-8-red?style=flat-square&logo=laravel&logoColor=white)](https://laravel.com)
+[![Laravel](https://img.shields.io/badge/laravel-9-red?style=flat-square&logo=laravel&logoColor=white)](https://laravel.com)
 [![License](https://img.shields.io/packagist/l/codezero/laravel-flash.svg?style=flat-square)](LICENSE.md)
 [![Build Status](https://img.shields.io/github/workflow/status/codezero-be/laravel-flash/Tests/master?style=flat-square&logo=github&logoColor=white&label=tests)](https://github.com/codezero-be/laravel-flash/actions)
 [![Code Coverage](https://img.shields.io/codacy/coverage/22d50bd2782540bb806f576966a5f5d5/master?style=flat-square)](https://app.codacy.com/gh/codezero-be/laravel-flash)
